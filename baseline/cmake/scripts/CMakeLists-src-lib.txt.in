@@ -1,0 +1,29 @@
+add_library(@TARGET_FULL_NAME@ SHARED)
+
+target_include_directories(@TARGET_FULL_NAME@
+    PUBLIC
+        ${OWN_INCLUDE_DIRS}
+)
+
+GENERATE_EXPORT_HEADER(@TARGET_FULL_NAME@
+    EXPORT_FILE_NAME
+    include/@TARGET_BASE_NAME@/export.hpp
+)
+if (UNIX)
+  # No liblib prefix
+  set_target_properties(@TARGET_FULL_NAME@ PROPERTIES LIBRARY_OUTPUT_NAME @TARGET_BASE_NAME@)
+endif()
+
+ target_sources(
+  @TARGET_FULL_NAME@
+  PRIVATE
+  # source files go here
+  PUBLIC
+    FILE_SET HEADERS
+      FILES
+      # headers go here
+    FILE_SET generated_headers
+      TYPE HEADERS
+      BASE_DIRS $<TARGET_PROPERTY:BINARY_DIR>
+      FILES $<TARGET_PROPERTY:BINARY_DIR>/include/@TARGET_BASE_NAME@/export.hpp
+)

@@ -1,0 +1,17 @@
+add_executable(@TARGET_FULL_NAME@)
+
+ target_sources(
+  @TARGET_FULL_NAME@
+  PRIVATE
+  # source files go here
+  src/lib.cc
+  PUBLIC
+    FILE_SET HEADERS
+      FILES
+      # headers go here
+    FILE_SET generated_headers
+      TYPE HEADERS
+      BASE_DIRS $<TARGET_PROPERTY:BINARY_DIR>
+      FILES
+      # headers go here
+)

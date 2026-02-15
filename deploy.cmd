@@ -1,0 +1,1 @@
+cmake -DDEST_DIR=%1 -P deploy.cmake

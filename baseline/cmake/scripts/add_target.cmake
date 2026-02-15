@@ -40,48 +40,15 @@ file(MAKE_DIRECTORY "${TARGET_PATH}/src")
 file(MAKE_DIRECTORY "${TARGET_TESTS_PATH}")
 
 if (DEFINED LIB)
-# Create CMakeLists.txt
-file(WRITE "${TARGET_PATH}/CMakeLists.txt"
-"add_library(${TARGET_FULL_NAME} SHARED)
-
-target_include_directories(${TARGET_FULL_NAME}
-    PUBLIC
-        \${OWN_INCLUDE_DIRS}
-)
-
-GENERATE_EXPORT_HEADER(${TARGET_FULL_NAME}
-    EXPORT_FILE_NAME
-    include/${TARGET_BASE_NAME}/export.hpp
-)
-if (UNIX)
-  # No liblib prefix
-  set_target_properties(${TARGET_FULL_NAME} PROPERTIES LIBRARY_OUTPUT_NAME ${TARGET_BASE_NAME})
-endif()
-")
-
-# Create tests CMakeLists.txt
-file(WRITE "${TARGET_TESTS_PATH}/CMakeLists.txt"
-"add_executable(${TARGET_FULL_NAME}-test)
-
-target_link_libraries(${TARGET_FULL_NAME}-test PRIVATE ${TARGET_FULL_NAME} Catch2::Catch2WithMain)
-
-add_test(NAME ${TARGET_FULL_NAME}-test COMMAND ${TARGET_FULL_NAME}-test)
-")
-
+  # Create CMakeLists.txt
+  configure_file("${CMAKE_CURRENT_LIST_DIR}/CMakeLists-src-lib.txt.in" "${TARGET_PATH}/CMakeLists.txt" @ONLY)
+  # Create tests CMakeLists.txt
+  configure_file("${CMAKE_CURRENT_LIST_DIR}/CMakeLists-tests-lib.txt.in" "${TARGET_TESTS_PATH}/CMakeLists.txt" @ONLY)
 else()
-# Create CMakeLists.txt
-file(WRITE "${TARGET_PATH}/CMakeLists.txt"
-"add_executable(${TARGET_FULL_NAME})
-")
-
-# Create tests CMakeLists.txt
-file(WRITE "${TARGET_TESTS_PATH}/CMakeLists.txt"
-"add_executable(${TARGET_FULL_NAME}-test)
-
-target_link_libraries(${TARGET_FULL_NAME}-test PRIVATE Catch2::Catch2WithMain)
-
-add_test(NAME ${TARGET_FULL_NAME}-test COMMAND ${TARGET_FULL_NAME}-test)
-")
+  # Create CMakeLists.txt
+  configure_file("${CMAKE_CURRENT_LIST_DIR}/CMakeLists-src-exe.txt.in" "${TARGET_PATH}/CMakeLists.txt" @ONLY)
+  # Create tests CMakeLists.txt
+  configure_file("${CMAKE_CURRENT_LIST_DIR}/CMakeLists-tests-exe.txt.in" "${TARGET_TESTS_PATH}/CMakeLists.txt" @ONLY)
 endif()
 
 
