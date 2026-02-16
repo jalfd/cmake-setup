@@ -53,4 +53,4 @@ endif()
 
 
 message(STATUS "Created target scaffold for target ${TARGET_BASE_NAME} at ${TARGET_FULL_NAME}")
-message(STATUS "Please add `add_subdirectory(${TARGET_FULL_NAME}) to src/CMakeLists.txt and tests/CMakeLists.txt")
+message(STATUS "Please add `add_subdirectory(${TARGET_FULL_NAME})` to src/CMakeLists.txt and tests/CMakeLists.txt")
