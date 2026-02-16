@@ -1,10 +1,9 @@
 add_executable(@TARGET_FULL_NAME@)
 
- target_sources(
+target_sources(
   @TARGET_FULL_NAME@
   PRIVATE
   # source files go here
-  src/lib.cc
   PUBLIC
     FILE_SET HEADERS
       FILES

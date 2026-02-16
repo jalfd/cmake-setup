@@ -14,7 +14,7 @@ if (UNIX)
   set_target_properties(@TARGET_FULL_NAME@ PROPERTIES LIBRARY_OUTPUT_NAME @TARGET_BASE_NAME@)
 endif()
 
- target_sources(
+target_sources(
   @TARGET_FULL_NAME@
   PRIVATE
   # source files go here
