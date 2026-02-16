@@ -8,7 +8,6 @@ target_sources(
   @TARGET_FULL_NAME@-test
   PRIVATE
   # source files go here
-  src/lib.cc
   PUBLIC
     FILE_SET HEADERS
       FILES
